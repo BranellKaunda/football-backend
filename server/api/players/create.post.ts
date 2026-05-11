@@ -10,7 +10,10 @@ export default defineHandler(async (event) => {
   const db = useDrizzle();
   const body = await readValidatedBody(event, schema);
 
-  await db.insert(players).values({ ...body, dob: body.dob.toISOString() });
+  const result = await db
+    .insert(players)
+    .values({ ...body, dob: body.dob.toISOString() })
+    .returning({ id: players.id });
 
-  return { success: true };
+  return { success: true, id: result[0]?.id };
 });
