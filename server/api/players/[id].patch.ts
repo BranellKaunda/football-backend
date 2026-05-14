@@ -1,5 +1,5 @@
 import { defineHandler } from "nitro";
-import { readValidatedBody } from "h3";
+import { readValidatedBody, setResponseStatus } from "h3";
 import { useDrizzle } from "~/server/utils/drizzle";
 import { players } from "~/server/database/schema";
 import { eq } from "drizzle-orm";
@@ -12,10 +12,11 @@ export default defineHandler(async (event) => {
   const body = await readValidatedBody(event, schema);
   const id = event.context.params?.id;
 
-  await db
+  const result = await db
     .update(players)
     .set({ ...body, dob: body.dob?.toISOString() })
-    .where(eq(players.id, Number(id)));
+    .where(eq(players.id, Number(id)))
+    .returning();
 
-  return { success: true };
+  return result[0];
 });

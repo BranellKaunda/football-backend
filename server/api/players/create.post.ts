@@ -13,7 +13,9 @@ export default defineHandler(async (event) => {
   const result = await db
     .insert(players)
     .values({ ...body, dob: body.dob.toISOString() })
-    .returning({ id: players.id });
+    .returning();
 
-  return { success: true, id: result[0]?.id };
+  event.res.status = 201;
+
+  return result[0];
 });

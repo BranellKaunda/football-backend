@@ -15,7 +15,9 @@ export default defineHandler(async (event) => {
   const db = useDrizzle();
   const body = await readValidatedBody(event, teamSchema);
 
-  await db.insert(teams).values(body).execute();
+  const result = await db.insert(teams).values(body).returning();
 
-  return { success: true };
+  event.res.status = 201;
+
+  return result[0];
 });

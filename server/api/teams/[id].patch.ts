@@ -19,10 +19,11 @@ export default defineHandler(async (event) => {
   const body = await readValidatedBody(event, patchTeamSchema);
   const id = event.context.params?.id;
 
-  await db
+  const result = await db
     .update(teams)
     .set(body)
-    .where(eq(teams.id, Number(id)));
+    .where(eq(teams.id, Number(id)))
+    .returning();
 
-  return { success: true };
+  return result[0];
 });

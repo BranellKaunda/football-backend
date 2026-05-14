@@ -6,7 +6,7 @@ export const playerSchema = z.object({
   firstName: z.string().min(2).transform(capitalize),
   lastName: z.string().min(2).transform(capitalize),
   dob: z.coerce.date(),
-  position: z.string().min(7).transform(capitalize),
+  position: z.string().min(2).transform(capitalize),
   weightKg: z.number().int().positive(),
   heightCm: z.number().int().positive(),
 });
