@@ -13,16 +13,29 @@ type MatchRecord = {
 };
 
 export default defineHandler(async (event) => {
-  // 1. Get competition ID from route params
-  const id = event.context.params?.id;
+  const form = await event.req.formData();
 
-  // 1. file path
-  const filePath = path.join(process.cwd(), "data", `2022season.csv`);
+  const file = form.get("file");
+  const competitionId = Number(form.get("competitionId"));
 
-  // 2. Read file as text
+  if (!file || typeof file === "string") {
+    return { error: "No file uploaded" };
+  }
+
+  // 1. Convert Blob → Buffer
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+
+  // 2. Build path inside /data folder
+  const filePath = path.join(process.cwd(), "data", file.name);
+
+  // 3. Save file to disk
+  fs.writeFileSync(filePath, buffer);
+
+  // 4. (Optional) Read file again
   const fileContent = fs.readFileSync(filePath, "utf8");
 
-  // 3. change to object
+  // 5. change to object
   const records: MatchRecord[] = parse(fileContent, {
     columns: true,
     skip_empty_lines: true,
@@ -38,7 +51,7 @@ export default defineHandler(async (event) => {
       match.date,
       match.home_goals,
       match.away_goals,
-      Number(id),
+      Number(competitionId),
     );
 
     if (result.created) {
