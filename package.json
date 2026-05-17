@@ -12,7 +12,7 @@
     "vite": "^8.0.3"
   },
   "dependencies": {
-    "@vercel/blob": "^2.3.2",
+    "@vercel/blob": "^2.3.3",
     "csv-parse": "^6.2.1",
     "drizzle-orm": "^1.0.0-beta.22",
     "es-toolkit": "^1.45.1",
