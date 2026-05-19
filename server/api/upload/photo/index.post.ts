@@ -12,6 +12,7 @@ export default defineEventHandler(async (event) => {
   // Upload to Vercel Blob
   const blob = await put(file.name, buffer, {
     access: "public",
+    addRandomSuffix: true,
   });
 
   return blob;

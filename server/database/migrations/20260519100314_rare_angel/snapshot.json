@@ -1,7 +1,7 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "6821a83c-cb98-4afb-813d-127dc26f8f50",
+  "id": "876c5086-f4af-4bc3-b275-58cbe92396aa",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
   ],
@@ -35,6 +35,12 @@
     {
       "isRlsEnabled": false,
       "name": "players",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "referees",
       "entityType": "tables",
       "schema": "public"
     },
@@ -201,6 +207,19 @@
       "default": null,
       "generated": null,
       "identity": null,
+      "name": "referee_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "matches"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
       "name": "competition_id",
       "entityType": "columns",
       "schema": "public",
@@ -309,6 +328,71 @@
       "entityType": "columns",
       "schema": "public",
       "table": "players"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "referees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "first_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "referees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "last_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "referees"
+    },
+    {
+      "type": "date",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "dob",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "referees"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "location",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "referees"
     },
     {
       "type": "serial",
@@ -438,6 +522,23 @@
     {
       "nameExplicit": false,
       "columns": [
+        "referee_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "referees",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "matches_referee_id_referees_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "matches"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
         "competition_id"
       ],
       "schemaTo": "public",
@@ -531,6 +632,16 @@
       "name": "players_pkey",
       "schema": "public",
       "table": "players",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "referees_pkey",
+      "schema": "public",
+      "table": "referees",
       "entityType": "pks"
     },
     {

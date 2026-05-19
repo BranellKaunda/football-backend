@@ -15,6 +15,10 @@ export const relations = defineRelations(schema, (r) => ({
       from: r.matches.competitionId,
       to: r.leagues.id,
     }),
+    referee: r.one.referees({
+      from: r.matches.refereeId,
+      to: r.referees.id,
+    }),
   },
 
   players: {

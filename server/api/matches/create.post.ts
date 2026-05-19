@@ -10,12 +10,13 @@ export default defineHandler(async (event) => {
   const db = useDrizzle();
   const body = await readValidatedBody(event, schema);
 
-  await db.insert(matches).values({
-    ...body,
-    matchDate: body.matchDate.toISOString(),
-  });
+  const result = await db
+    .insert(matches)
+    .values({
+      ...body,
+      matchDate: body.matchDate.toISOString(),
+    })
+    .returning();
 
-  return {
-    success: true,
-  };
+  return result[0];
 });

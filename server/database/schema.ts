@@ -56,6 +56,9 @@ export const matches = pgTable("matches", {
   awayTeamGoals: integer("away_team_goals").default(0),
   matchDate: date("match_date").notNull(),
   status: matchStatusEnum().notNull().default("Finished"),
+  refereeId: integer("referee_id")
+    .notNull()
+    .references(() => referees.id),
   competitionId: integer("competition_id")
     .notNull()
     .references(() => leagues.id),
@@ -69,4 +72,12 @@ export const teamsXleagues = pgTable("teams_x_leagues", {
   leagueId: integer("league_id")
     .notNull()
     .references(() => leagues.id),
+});
+
+export const referees = pgTable("referees", {
+  id: serial("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  dob: date("dob").notNull(),
+  location: text("location").notNull(),
 });

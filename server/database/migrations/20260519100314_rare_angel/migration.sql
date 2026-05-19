@@ -14,6 +14,7 @@ CREATE TABLE "matches" (
 	"away_team_goals" integer DEFAULT 0,
 	"match_date" date NOT NULL,
 	"status" "match_status" DEFAULT 'Finished'::"match_status" NOT NULL,
+	"referee_id" integer NOT NULL,
 	"competition_id" integer NOT NULL
 );
 --> statement-breakpoint
@@ -26,6 +27,14 @@ CREATE TABLE "players" (
 	"position" text NOT NULL,
 	"weight_kg" integer NOT NULL,
 	"height_cm" integer NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "referees" (
+	"id" serial PRIMARY KEY,
+	"first_name" text NOT NULL,
+	"last_name" text NOT NULL,
+	"dob" date NOT NULL,
+	"location" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "teams" (
@@ -43,6 +52,7 @@ CREATE TABLE "teams_x_leagues" (
 --> statement-breakpoint
 ALTER TABLE "matches" ADD CONSTRAINT "matches_home_team_id_teams_id_fkey" FOREIGN KEY ("home_team_id") REFERENCES "teams"("id");--> statement-breakpoint
 ALTER TABLE "matches" ADD CONSTRAINT "matches_away_team_id_teams_id_fkey" FOREIGN KEY ("away_team_id") REFERENCES "teams"("id");--> statement-breakpoint
+ALTER TABLE "matches" ADD CONSTRAINT "matches_referee_id_referees_id_fkey" FOREIGN KEY ("referee_id") REFERENCES "referees"("id");--> statement-breakpoint
 ALTER TABLE "matches" ADD CONSTRAINT "matches_competition_id_leagues_id_fkey" FOREIGN KEY ("competition_id") REFERENCES "leagues"("id");--> statement-breakpoint
 ALTER TABLE "players" ADD CONSTRAINT "players_team_id_teams_id_fkey" FOREIGN KEY ("team_id") REFERENCES "teams"("id");--> statement-breakpoint
 ALTER TABLE "teams_x_leagues" ADD CONSTRAINT "teams_x_leagues_team_id_teams_id_fkey" FOREIGN KEY ("team_id") REFERENCES "teams"("id");--> statement-breakpoint
