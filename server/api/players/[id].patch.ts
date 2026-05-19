@@ -1,5 +1,5 @@
 import { defineHandler } from "nitro";
-import { readValidatedBody, setResponseStatus } from "h3";
+import { readValidatedBody } from "h3";
 import { useDrizzle } from "~/server/utils/drizzle";
 import { players } from "~/server/database/schema";
 import { eq } from "drizzle-orm";
