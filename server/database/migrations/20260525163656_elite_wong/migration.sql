@@ -39,6 +39,12 @@ CREATE TABLE "players" (
 	"height_cm" integer NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE "players_x_matches" (
+	"id" serial PRIMARY KEY,
+	"player_id" integer NOT NULL,
+	"match_id" integer NOT NULL
+);
+--> statement-breakpoint
 CREATE TABLE "referees" (
 	"id" serial PRIMARY KEY,
 	"first_name" text NOT NULL,
@@ -66,5 +72,7 @@ ALTER TABLE "matches" ADD CONSTRAINT "matches_referee_id_referees_id_fkey" FOREI
 ALTER TABLE "matches" ADD CONSTRAINT "matches_competition_id_leagues_id_fkey" FOREIGN KEY ("competition_id") REFERENCES "leagues"("id");--> statement-breakpoint
 ALTER TABLE "player_records" ADD CONSTRAINT "player_records_player_id_players_id_fkey" FOREIGN KEY ("player_id") REFERENCES "players"("id");--> statement-breakpoint
 ALTER TABLE "players" ADD CONSTRAINT "players_team_id_teams_id_fkey" FOREIGN KEY ("team_id") REFERENCES "teams"("id");--> statement-breakpoint
+ALTER TABLE "players_x_matches" ADD CONSTRAINT "players_x_matches_player_id_players_id_fkey" FOREIGN KEY ("player_id") REFERENCES "players"("id");--> statement-breakpoint
+ALTER TABLE "players_x_matches" ADD CONSTRAINT "players_x_matches_match_id_matches_id_fkey" FOREIGN KEY ("match_id") REFERENCES "matches"("id");--> statement-breakpoint
 ALTER TABLE "teams_x_leagues" ADD CONSTRAINT "teams_x_leagues_team_id_teams_id_fkey" FOREIGN KEY ("team_id") REFERENCES "teams"("id");--> statement-breakpoint
 ALTER TABLE "teams_x_leagues" ADD CONSTRAINT "teams_x_leagues_league_id_leagues_id_fkey" FOREIGN KEY ("league_id") REFERENCES "leagues"("id");

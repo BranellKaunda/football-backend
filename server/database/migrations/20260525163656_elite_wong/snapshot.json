@@ -1,7 +1,7 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "ea451551-a4db-4ad5-814b-32714e58ff9b",
+  "id": "31cb16ad-5362-4f5e-9aef-a20f422d0b53",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
   ],
@@ -41,6 +41,12 @@
     {
       "isRlsEnabled": false,
       "name": "players",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "players_x_matches",
       "entityType": "tables",
       "schema": "public"
     },
@@ -437,6 +443,45 @@
       "name": "id",
       "entityType": "columns",
       "schema": "public",
+      "table": "players_x_matches"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "player_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "players_x_matches"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "match_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "players_x_matches"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
       "table": "referees"
     },
     {
@@ -687,6 +732,40 @@
     {
       "nameExplicit": false,
       "columns": [
+        "player_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "players",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "players_x_matches_player_id_players_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "players_x_matches"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "match_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "matches",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "players_x_matches_match_id_matches_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "players_x_matches"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
         "team_id"
       ],
       "schemaTo": "public",
@@ -756,6 +835,16 @@
       "name": "players_pkey",
       "schema": "public",
       "table": "players",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "players_x_matches_pkey",
+      "schema": "public",
+      "table": "players_x_matches",
       "entityType": "pks"
     },
     {

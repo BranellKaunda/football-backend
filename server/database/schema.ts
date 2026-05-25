@@ -83,7 +83,7 @@ export const referees = pgTable("referees", {
   location: text("location").notNull(),
 });
 
-/* export const playersXmatches = pgTable("players_x_matches", {
+export const playersXmatches = pgTable("players_x_matches", {
   id: serial("id").primaryKey(),
   playerId: integer("player_id")
     .notNull()
@@ -91,7 +91,7 @@ export const referees = pgTable("referees", {
   matchId: integer("match_id")
     .notNull()
     .references(() => matches.id),
-}); */
+});
 
 export const playerRecords = pgTable("player_records", {
   id: serial("id").primaryKey(),
