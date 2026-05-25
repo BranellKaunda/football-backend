@@ -31,6 +31,7 @@ export const players = pgTable("players", {
     .references(() => teams.id),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
+  photo: text("photo").notNull(),
   dob: date("dob").notNull(),
   position: text("position").notNull(),
   weightKg: integer("weight_kg").notNull(),
@@ -80,4 +81,25 @@ export const referees = pgTable("referees", {
   lastName: text("last_name").notNull(),
   dob: date("dob").notNull(),
   location: text("location").notNull(),
+});
+
+/* export const playersXmatches = pgTable("players_x_matches", {
+  id: serial("id").primaryKey(),
+  playerId: integer("player_id")
+    .notNull()
+    .references(() => players.id),
+  matchId: integer("match_id")
+    .notNull()
+    .references(() => matches.id),
+}); */
+
+export const playerRecords = pgTable("player_records", {
+  id: serial("id").primaryKey(),
+  playerId: integer("player_id")
+    .notNull()
+    .references(() => players.id),
+  goals: integer("goals").default(0),
+  assists: integer("assists").default(0),
+  yellowCards: integer("yellow_cards").default(0),
+  redCards: integer("red_cards").default(0),
 });

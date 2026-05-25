@@ -1,7 +1,7 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "876c5086-f4af-4bc3-b275-58cbe92396aa",
+  "id": "ea451551-a4db-4ad5-814b-32714e58ff9b",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
   ],
@@ -29,6 +29,12 @@
     {
       "isRlsEnabled": false,
       "name": "matches",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "isRlsEnabled": false,
+      "name": "player_records",
       "entityType": "tables",
       "schema": "public"
     },
@@ -236,6 +242,84 @@
       "name": "id",
       "entityType": "columns",
       "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "player_id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "goals",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "assists",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "yellow_cards",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "0",
+      "generated": null,
+      "identity": null,
+      "name": "red_cards",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "type": "serial",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
       "table": "players"
     },
     {
@@ -273,6 +357,19 @@
       "generated": null,
       "identity": null,
       "name": "last_name",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "players"
+    },
+    {
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "photo",
       "entityType": "columns",
       "schema": "public",
       "table": "players"
@@ -556,6 +653,23 @@
     {
       "nameExplicit": false,
       "columns": [
+        "player_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "players",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "player_records_player_id_players_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "player_records"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
         "team_id"
       ],
       "schemaTo": "public",
@@ -622,6 +736,16 @@
       "name": "matches_pkey",
       "schema": "public",
       "table": "matches",
+      "entityType": "pks"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "player_records_pkey",
+      "schema": "public",
+      "table": "player_records",
       "entityType": "pks"
     },
     {

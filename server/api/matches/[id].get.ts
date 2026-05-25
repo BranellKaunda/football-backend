@@ -14,6 +14,7 @@ export default defineHandler(async (event) => {
       homeTeam: true,
       awayTeam: true,
       competition: true,
+      referee: true,
     },
 
     where: {

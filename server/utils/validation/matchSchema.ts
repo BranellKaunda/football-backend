@@ -15,5 +15,6 @@ export const matchSchema = z.object({
     "Cancelled",
     "Abandoned",
   ]),
+  refereeId: z.number().int().positive(),
   competitionId: z.number().int().positive(),
 });
