@@ -2,8 +2,6 @@ import { useDrizzle } from "~/server/utils/drizzle";
 import { defineHandler } from "nitro";
 import { getQuery } from "h3";
 
-//import { matchStatusEnum } from "~/server/database/schema";
-
 export default defineHandler(async (event) => {
   const query = getQuery(event);
 
@@ -28,6 +26,9 @@ export default defineHandler(async (event) => {
       awayTeam: true,
       competition: true,
       referee: true,
+      players: {
+        columns: { id: true, firstName: true, lastName: true, teamId: true },
+      },
     },
 
     where: {

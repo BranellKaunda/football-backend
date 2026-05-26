@@ -31,7 +31,7 @@ export const players = pgTable("players", {
     .references(() => teams.id),
   firstName: text("first_name").notNull(),
   lastName: text("last_name").notNull(),
-  photo: text("photo").notNull(),
+  photo: text("photo"),
   dob: date("dob").notNull(),
   position: text("position").notNull(),
   weightKg: integer("weight_kg").notNull(),
