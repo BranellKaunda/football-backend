@@ -17,6 +17,17 @@ export const matchStatusEnum = pgEnum("match_status", [
   "Abandoned",
 ]);
 
+export const matchActionsEnum = pgEnum("match_action_type", [
+  "Goal",
+  "Own Goal",
+  "Assist",
+  "Yellow Card",
+  "Second Yellow Card",
+  "Red Card",
+  "Substitution",
+  "Penalty",
+]);
+
 export const teams = pgTable("teams", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -93,13 +104,14 @@ export const playersXmatches = pgTable("players_x_matches", {
     .references(() => matches.id),
 });
 
-export const playerRecords = pgTable("player_records", {
+export const match_actions = pgTable("match_actions", {
   id: serial("id").primaryKey(),
-  playerId: integer("player_id")
+  playerId: integer("player_id").references(() => players.id),
+  playerIdExtra: integer("player_id_extra").references(() => players.id),
+  teamId: integer("team_id").references(() => teams.id),
+  matchId: integer("match_id")
     .notNull()
-    .references(() => players.id),
-  goals: integer("goals").default(0),
-  assists: integer("assists").default(0),
-  yellowCards: integer("yellow_cards").default(0),
-  redCards: integer("red_cards").default(0),
+    .references(() => matches.id),
+  action: matchActionsEnum(),
+  minute: integer("minute").notNull(),
 });
