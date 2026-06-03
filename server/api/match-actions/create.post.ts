@@ -5,22 +5,20 @@ import { useDrizzle } from "~/server/utils/drizzle";
 import { match_actions } from "~/server/database/schema";
 
 const schema = z.object({
-  playerId: z.int().positive().optional(),
+  playerId: z.int().positive(),
   playerIdExtra: z.int().positive().optional(),
   teamId: z.int().positive().optional(),
   matchId: z.int().positive(),
-  action: z
-    .enum([
-      "Goal",
-      "Own Goal",
-      "Assist",
-      "Yellow Card",
-      "Second Yellow Card",
-      "Red Card",
-      "Substitution",
-      "Penalty",
-    ])
-    .optional(),
+  action: z.enum([
+    "Goal",
+    "Own Goal",
+    "Assist",
+    "Yellow Card",
+    "Second Yellow Card",
+    "Red Card",
+    "Substitution",
+    "Penalty",
+  ]),
   minute: z.int().min(0).max(120),
 });
 

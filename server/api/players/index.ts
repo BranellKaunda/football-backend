@@ -6,6 +6,7 @@ export default defineHandler(async (event) => {
   const query = getQuery(event);
 
   const OR = [
+    query.teamId && { teamId: Number(query.teamId) },
     query.name && { firstName: { ilike: `%${query.name}%` } },
     query.name && { lastName: { ilike: `%${query.name}%` } },
     query.position && { position: { ilike: `%${query.position}%` } },

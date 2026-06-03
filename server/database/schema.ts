@@ -6,6 +6,7 @@ import {
   integer,
   date,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const matchStatusEnum = pgEnum("match_status", [
   "Scheduled",
@@ -106,12 +107,16 @@ export const playersXmatches = pgTable("players_x_matches", {
 
 export const match_actions = pgTable("match_actions", {
   id: serial("id").primaryKey(),
-  playerId: integer("player_id").references(() => players.id),
-  playerIdExtra: integer("player_id_extra").references(() => players.id),
+  playerId: integer("player_id")
+    .references(() => players.id)
+    .notNull(),
+  playerIdExtra: integer("player_id_extra")
+    .references(() => players.id)
+    .default(sql`NULL`),
   teamId: integer("team_id").references(() => teams.id),
   matchId: integer("match_id")
     .notNull()
     .references(() => matches.id),
-  action: matchActionsEnum(),
+  action: matchActionsEnum().notNull(),
   minute: integer("minute").notNull(),
 });
