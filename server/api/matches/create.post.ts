@@ -18,5 +18,7 @@ export default defineHandler(async (event) => {
     })
     .returning();
 
+  event.res.status = 201;
+
   return result[0];
 });
