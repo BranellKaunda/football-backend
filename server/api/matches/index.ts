@@ -34,6 +34,7 @@ export default defineHandler(async (event) => {
     where: {
       OR: OR as any,
     },
+    orderBy: { matchDate: "desc" },
   });
 
   return results;

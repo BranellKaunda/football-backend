@@ -20,6 +20,7 @@ export default defineHandler(async (event) => {
         { season: query.season ? query.season : undefined },
       ],
     },
+    orderBy: { season: "desc" },
   });
 
   return leagues;

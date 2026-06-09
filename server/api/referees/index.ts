@@ -16,6 +16,7 @@ export default defineHandler(async (event) => {
     where: {
       OR: OR as any,
     },
+    orderBy: { firstName: "asc" },
   });
 
   return results;

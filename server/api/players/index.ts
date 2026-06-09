@@ -25,6 +25,7 @@ export default defineHandler(async (event) => {
       team: true,
     },
     where: { OR: OR as any },
+    orderBy: { firstName: "asc" },
   });
 
   return players;

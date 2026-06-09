@@ -12,6 +12,7 @@ export default defineHandler(async (event) => {
 
   const teams = await useDrizzle().query.teams.findMany({
     where: { OR: OR as any },
+    orderBy: { name: "asc" },
   });
 
   return teams;
